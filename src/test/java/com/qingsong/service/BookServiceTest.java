@@ -7,6 +7,7 @@ import org.elasticsearch.cluster.metadata.AliasMetaData;
 import org.elasticsearch.common.settings.Settings;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 
 import java.util.List;
@@ -27,8 +28,20 @@ public class BookServiceTest extends SpringbootEsDemoApplicationTests {
 
     @Test
     public void list() {
-        List<AliasMetaData> aliasMetaData = elasticsearchTemplate.queryForAlias("book");
         List<Book> list = bookService.list();
         System.out.println(list);
+    }
+
+    @Test
+    public void count() {
+        long count = bookService.count();
+        System.out.println(count);
+    }
+
+    @Test
+    public void pageQuery() {
+        Page<Book> pageQuery = bookService.pageQuery("java");
+        List<Book> content = pageQuery.getContent();
+        System.out.println(content);
     }
 }
