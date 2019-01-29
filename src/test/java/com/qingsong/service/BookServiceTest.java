@@ -27,8 +27,6 @@ public class BookServiceTest extends SpringbootEsDemoApplicationTests {
 
     @Test
     public void list() {
-        Client client = elasticsearchTemplate.getClient();
-        Settings settings = client.settings();
         List<AliasMetaData> aliasMetaData = elasticsearchTemplate.queryForAlias("book");
         List<Book> list = bookService.list();
         System.out.println(list);

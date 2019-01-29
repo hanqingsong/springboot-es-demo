@@ -2,7 +2,6 @@ package com.qingsong.repository;
 
 import com.qingsong.entity.Book;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  * @Description
