@@ -1,6 +1,7 @@
 package com.qingsong.repository;
 
 import com.qingsong.entity.Book;
+import com.qingsong.entity.UserComment;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +12,5 @@ import org.springframework.stereotype.Repository;
  * @Version 1.0
  */
 @Repository
-public interface BookRepository extends ElasticsearchRepository<Book,String> {
+public interface UserCommentRepository extends ElasticsearchRepository<UserComment,Integer> {
 }

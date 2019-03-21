@@ -2,9 +2,11 @@ package com.qingsong.service;
 
 import com.qingsong.SpringbootEsDemoApplicationTests;
 import com.qingsong.entity.Book;
+import com.qingsong.entity.UserComment;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.cluster.metadata.AliasMetaData;
 import org.elasticsearch.common.settings.Settings;
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,12 +27,29 @@ public class BookServiceTest extends SpringbootEsDemoApplicationTests {
     BookService bookService;
     @Autowired
     public ElasticsearchTemplate elasticsearchTemplate;
-
+    @Autowired
+    private UserCommentService userCommentService;
     @Test
     public void list() {
+        UserComment.UserCommentBuilder builder = UserComment.builder()
+                .commentId(1L)
+                .themeId(1L)
+                .userId(1L)
+                .type(1)
+                .status(1)
+                .content("内容")
+                .createTime(DateTime.now().toDate())
+                .updateTime(DateTime.now().toDate());
+
+
+        UserComment save = userCommentService.save(builder.build());
+        System.out.println(save);
+
         List<Book> list = bookService.list();
         System.out.println(list);
     }
+
+
 
     @Test
     public void count() {

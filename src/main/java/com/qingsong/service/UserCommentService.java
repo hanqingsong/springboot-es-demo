@@ -1,12 +1,11 @@
 package com.qingsong.service;
 
-import com.qingsong.entity.Book;
-import com.qingsong.repository.BookRepository;
+import com.qingsong.entity.UserComment;
+import com.qingsong.repository.UserCommentRepository;
 import org.apache.commons.collections4.IteratorUtils;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
@@ -20,17 +19,17 @@ import java.util.List;
  * @Version 1.0
  */
 @Service
-public class BookService {
+public class UserCommentService {
     @Autowired
-    BookRepository bookRepository;
+    UserCommentRepository userCommentRepository;
 
     /**
      * 列表
      * @return
      */
-    List<Book> list(){
-        Iterable<Book> books = bookRepository.findAll();
-        List<Book> list = IteratorUtils.toList(books.iterator());
+    List<UserComment> list(){
+        Iterable<UserComment> userComments = userCommentRepository.findAll();
+        List<UserComment> list = IteratorUtils.toList(userComments.iterator());
         return list;
     }
 
@@ -39,7 +38,7 @@ public class BookService {
      * @return
      */
     long count(){
-        long count = bookRepository.count();
+        long count = userCommentRepository.count();
         return count;
     }
 
@@ -47,8 +46,8 @@ public class BookService {
      * 新增
      * @return
      */
-    Book save(Book book){
-        Book save = bookRepository.save(book);
+    UserComment save(UserComment userComment){
+        UserComment save = userCommentRepository.save(userComment);
         return save;
     }
 
@@ -57,12 +56,12 @@ public class BookService {
      * @param kw
      * @return
      */
-    public Page<Book> pageQuery(String kw) {
+    public Page<UserComment> pageQuery(String kw) {
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(QueryBuilders.matchQuery("name", kw))
                 // .withPageable(PageRequest.of(1, 20))
                 .build();
-        return bookRepository.search(searchQuery);
+        return userCommentRepository.search(searchQuery);
     }
 
 }
